@@ -6,7 +6,6 @@ export class Main extends React.Component {
   render() {
     return (
         <section className="main">
-          {/*<Register/>*/}
           <Switch>
             <Route exact path="/" component={Login}/>
             <Route path="/login" component={Login}/>
