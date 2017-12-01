@@ -1,15 +1,30 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect} from 'react-router-dom'
 import { Register } from './Register';
+import { Home } from './Home';
 import { Login } from './Login';
+
+
 export class Main extends React.Component {
+  getLogin = () => {
+    return this.props.isLoggedIn ? <Redirect to="/home"/> : <Login/>;
+  }
+
+  getHome = () => {
+    return this.props.isLoggedIn ? <Home/> : <Redirect to="/login"/>;
+  }
+
+  getRoot = () => {
+    return <Redirect to="/login"/>
+  }
   render() {
     return (
         <section className="main">
           <Switch>
-            <Route exact path="/" component={Login}/>
-            <Route path="/login" component={Login}/>
+            <Route exact path="/" render={this.getRoot}/>
+            <Route path="/login" render={this.getLogin}/>
             <Route path="/register" component={Register}/>
+            <Route path="/home" render={this.getHome}/>
             <Route component={Login}/>
           </Switch>
         </section>
