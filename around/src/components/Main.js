@@ -1,13 +1,18 @@
 import React from 'react';
+import { Switch, Route } from 'react-router-dom'
 import { Register } from './Register';
-// import './Main.css';
 import { Login } from './Login';
 export class Main extends React.Component {
   render() {
     return (
         <section className="main">
           {/*<Register/>*/}
-          <Login/>
+          <Switch>
+            <Route exact path="/" component={Login}/>
+            <Route path="/login" component={Login}/>
+            <Route path="/register" component={Register}/>
+            <Route component={Login}/>
+          </Switch>
         </section>
     );
   }
