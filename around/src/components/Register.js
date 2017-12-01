@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import { Form, Input, Button, message} from 'antd';
-import { API_ROOT } from './constants';
+import { API_ROOT } from '../constants';
 
 const FormItem = Form.Item;
 
@@ -127,5 +127,5 @@ class RegistrationForm extends React.Component {
   }
 }
 // higher-order component 的用法
-export const WrappedRegister = Form.create()(RegistrationForm);
+export const Register = Form.create()(RegistrationForm);
 
