@@ -2,7 +2,7 @@ import React from 'react';
 import $ from 'jquery';
 import { Tabs, Button, Spin} from 'antd';
 import {AUTH_PREFIX, GEO_OPTIONS, POS_KEY, TOKEN_KEY, API_ROOT} from "../constants"
-
+import { Gallery } from "./Gallery";
 
 const TabPane = Tabs.TabPane;
 const operations = <Button>Extra Action</Button>;
@@ -47,8 +47,22 @@ export class Home extends React.Component {
       return <div>{this.state.error}</div>
     } else if (this.state.loadingGeoLocation) {
       return <Spin tip="loading geolocation ..."/>
-    } else if (this.loadingPosts) {
+    } else if (this.state.loadingPosts) {
       return <Spin tip="loading posts ..."/>
+    } else if (this.state.posts.length > 0) {
+      // [1,2,3] ====> f =====> [f(1), f(2), f(3)]
+      const images = this.state.posts.map((post) => {
+        return {
+          user: post.user,
+          src: post.url,
+          thumbnail: post.url,
+          thumbnailWidth: 400,
+          thumbnailHeight: 300,
+          caption: post.message,
+        };
+      });
+      console.log(images);
+      return <Gallery images={images}/>
     }
     return null;
   }
