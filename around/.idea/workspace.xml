@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ca321902-a2ca-4080-8ffc-028996e72d54" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/Gallery.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/CreatePostButton.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/CreatePostForm.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Home.js" afterPath="$PROJECT_DIR$/src/components/Home.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../service/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../service/.idea/workspace.xml" />
     </list>
@@ -18,40 +17,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Main.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="42" lean-forward="false" selection-start-line="9" selection-start-column="42" selection-end-line="9" selection-end-column="42" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="App.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/styles/App.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="19" lean-forward="false" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Header.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Header.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="3" lean-forward="false" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Header.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/styles/Header.css">
           <provider selected="true" editor-type-id="text-editor">
@@ -82,8 +47,8 @@
       <file leaf-file-name="Home.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Home.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="825">
-              <caret line="55" column="26" lean-forward="true" selection-start-line="55" selection-start-column="26" selection-end-line="55" selection-end-column="26" />
+            <state relative-caret-position="1080">
+              <caret line="72" column="38" lean-forward="false" selection-start-line="72" selection-start-column="38" selection-end-line="72" selection-end-column="38" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -91,11 +56,35 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Gallery.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CreatePostButton.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/CreatePostButton.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="468">
+              <caret line="75" column="0" lean-forward="true" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CreatePostForm.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/CreatePostForm.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="63" column="23" lean-forward="true" selection-start-line="63" selection-start-column="23" selection-end-line="63" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Gallery.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Gallery.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="41" column="0" lean-forward="true" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+            <state relative-caret-position="-123">
+              <caret line="21" column="14" lean-forward="true" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
               </folding>
@@ -178,8 +167,10 @@
         <option value="$PROJECT_DIR$/src/styles/Home.css" />
         <option value="$PROJECT_DIR$/src/styles/App.css" />
         <option value="$PROJECT_DIR$/src/constants.js" />
-        <option value="$PROJECT_DIR$/src/components/Home.js" />
         <option value="$PROJECT_DIR$/src/components/Gallery.js" />
+        <option value="$PROJECT_DIR$/src/components/Home.js" />
+        <option value="$PROJECT_DIR$/src/components/CreatePostButton.js" />
+        <option value="$PROJECT_DIR$/src/components/CreatePostForm.js" />
       </list>
     </option>
   </component>
@@ -200,8 +191,8 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1923" />
-    <option name="y" value="136" />
+    <option name="x" value="1852" />
+    <option name="y" value="126" />
     <option name="width" value="1416" />
     <option name="height" value="876" />
   </component>
@@ -389,15 +380,15 @@
       <workItem from="1511647662481" duration="1501000" />
       <workItem from="1511649197194" duration="8529000" />
       <workItem from="1512096908677" duration="11218000" />
-      <workItem from="1512338604316" duration="8747000" />
+      <workItem from="1512338604316" duration="10583000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29995000" />
+    <option name="totallyTimeSpent" value="31831000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1923" y="136" width="1416" height="876" extended-state="0" />
+    <frame x="1852" y="126" width="1416" height="876" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -829,14 +820,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/HTML5.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="1511" column="3" lean-forward="true" selection-start-line="1511" selection-start-column="3" selection-end-line="1511" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/styles/Home.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -853,22 +836,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Gallery.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-123">
+          <caret line="21" column="14" lean-forward="true" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/HTML5.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="2016" column="0" lean-forward="false" selection-start-line="2016" selection-start-column="0" selection-end-line="2016" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Home.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="825">
-          <caret line="55" column="26" lean-forward="true" selection-start-line="55" selection-start-column="26" selection-end-line="55" selection-end-column="26" />
+        <state relative-caret-position="1080">
+          <caret line="72" column="38" lean-forward="false" selection-start-line="72" selection-start-column="38" selection-end-line="72" selection-end-column="38" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Gallery.js">
+    <entry file="file://$PROJECT_DIR$/src/components/CreatePostButton.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="41" column="0" lean-forward="true" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+        <state relative-caret-position="468">
+          <caret line="75" column="0" lean-forward="true" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
           <folding>
-            <element signature="e#0#40#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/CreatePostForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="63" column="23" lean-forward="true" selection-start-line="63" selection-start-column="23" selection-end-line="63" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
