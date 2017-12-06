@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal, Button } from 'antd';
-
+import { WrappedCreatePostForm } from './CreatePostForm'
 export class CreatePostButton extends React.Component {
   state = {
     ModalText: 'Content of the modal',
@@ -31,7 +31,7 @@ export class CreatePostButton extends React.Component {
     });
   }
   render() {
-    const { visible, confirmLoading, ModalText } = this.state;
+    const { visible, confirmLoading } = this.state;
     return (
         <div>
           <Button type="primary" onClick={this.showModal}>Create New Post</Button>
@@ -43,7 +43,7 @@ export class CreatePostButton extends React.Component {
                  onCancel={this.handleCancel}
                  cancelText="Cancel"
           >
-            <p>{ModalText}</p>
+            <WrappedCreatePostForm/>
           </Modal>
         </div>
     );
