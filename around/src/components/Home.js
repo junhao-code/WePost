@@ -5,7 +5,7 @@ import {AUTH_PREFIX, GEO_OPTIONS, POS_KEY, TOKEN_KEY, API_ROOT} from "../constan
 import { Gallery } from "./Gallery";
 import { CreatePostButton } from "./CreatePostButton"
 const TabPane = Tabs.TabPane;
-const operations = <Button>Extra Action</Button>;
+// const operations = <Button>Extra Action</Button>;
 
 export class Home extends React.Component {
   state = {
@@ -49,7 +49,7 @@ export class Home extends React.Component {
       return <Spin tip="loading geolocation ..."/>
     } else if (this.state.loadingPosts) {
       return <Spin tip="loading posts ..."/>
-    } else if (this.state.posts.length > 0) {
+    } else if (this.state.posts && this.state.posts.length > 0) {
       // [1,2,3] ====> f =====> [f(1), f(2), f(3)]
       const images = this.state.posts.map((post) => {
         return {

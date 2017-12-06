@@ -13,7 +13,7 @@ export class Header extends React.Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">WePost</h1>
           {this.props.isLoggedIn ?
-          <a href="#"
+          <a href=""
             className="logout"
              onClick={this.props.handleLogout}
           >
