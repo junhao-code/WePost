@@ -70,13 +70,14 @@ export class Home extends React.Component {
     return null;
   }
 
-  loadNearbyPosts = (location) => {
+  loadNearbyPosts = (location, radius) => {
     const {lat, lon} = location ? location : JSON.parse(localStorage.getItem(POS_KEY));
     // const {lat, lon} = {"lat":37.5629917,"lon":-122.32552539999998};
+    const range = radius ? radius : 20;
     this.setState({ loadingPosts: true });
     // console.log();
     return $.ajax({
-      url: `${API_ROOT}/search?lat=${lat}&lon=${lon}&range=20`,
+      url: `${API_ROOT}/search?lat=${lat}&lon=${lon}&range=${range}`,
       method: 'GET',
       headers: {
         Authorization: `${AUTH_PREFIX} ${localStorage.getItem(TOKEN_KEY)}`
