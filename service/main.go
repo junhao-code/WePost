@@ -101,10 +101,10 @@ const (
 	TYPE = "post"
 	DISTANCE = "200km"
 	// Needs to update
-	PROJECT_ID = "around-186000"
-	BT_INSTANCE = "around-post"
+	//PROJECT_ID = "around-186000"
+	//BT_INSTANCE = "around-post"
 	// Needs to update this URL if you deploy it to cloud.
-	ES_URL = "http://35.227.44.252:9200"
+	ES_URL = "http://35.185.97.35 :9200"
 	// GCS
 	BUCKET_NAME = "post-images-186000"
 )
