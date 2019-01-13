@@ -6,11 +6,13 @@ import { Login } from './Login';
 import { PropTypes } from 'prop-types';
 
 export class Main extends React.Component {
+  // propTypes is declared at the level which we will receive these props
   static propTypes = {
     isLoggedIn: PropTypes.bool.isRequired,
     handleLogin: PropTypes.func.isRequired,
 
   }
+  // these three functions will return corresponding components based on login status
   getLogin = () => {
     return this.props.isLoggedIn ? <Redirect to="/home"/> : <Login handleLogin={this.props.handleLogin}/>;
   }
@@ -26,6 +28,9 @@ export class Main extends React.Component {
     return (
         <section className="main">
           <Switch>
+            // In React Router
+            // render = {} is to render functions
+            // component = {} is to evaluate component
             <Route exact path="/" render={this.getRoot}/>
             <Route path="/login" render={this.getLogin}/>
             <Route path="/register" component={Register}/>

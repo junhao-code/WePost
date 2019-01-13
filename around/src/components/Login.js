@@ -7,6 +7,7 @@ import { PropTypes } from 'prop-types';
 const FormItem = Form.Item;
 
 class NormalLoginForm extends React.Component {
+  // propTypes is declared at the level which we will receive these props
   static propTypes = {
     handleLogin: PropTypes.func.isRequired,
   }
@@ -54,6 +55,7 @@ class NormalLoginForm extends React.Component {
             <Button type="primary" htmlType="submit" className="login-form-button">
               Log in
             </Button>
+            {/*link to register form*/}
             Or <Link to="register">register now!</Link>
           </FormItem>
         </Form>
@@ -62,5 +64,3 @@ class NormalLoginForm extends React.Component {
 }
 
 export const Login = Form.create()(NormalLoginForm);
-
-// ReactDOM.render(<WrappedNormalLoginForm />, mountNode);

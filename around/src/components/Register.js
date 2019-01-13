@@ -124,6 +124,7 @@ class RegistrationForm extends React.Component {
 
           <FormItem {...tailFormItemLayout}>
             <Button type="primary" htmlType="submit">Register</Button>
+            {/*Link to login form*/}
             <p>It appears you have already registered, <Link to="login">login</Link> now!</p>
           </FormItem>
         </Form>

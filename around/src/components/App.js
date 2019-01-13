@@ -9,9 +9,12 @@ import { TOKEN_KEY} from "../constants"
 
 
 class App extends Component {
+  // isLoggedIn is used to avoid direct access via URL manipulation
+  // we are adding this state at this level because we need it for both Header and Main
   state = {
     isLoggedIn: Boolean(localStorage.getItem(TOKEN_KEY)),
   }
+  // localStorage works as key value pair, the browser will save these key value pairs until we clear them out
   handleLogin = (token) => {
     localStorage.setItem(TOKEN_KEY, token)
     this.setState({ isLoggedIn: true});
@@ -21,6 +24,7 @@ class App extends Component {
     localStorage.removeItem(TOKEN_KEY);
     this.setState({isLoggedIn: false});
   }
+
   render() {
     return (
       <div className="App">

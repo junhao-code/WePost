@@ -32,15 +32,17 @@ export class Home extends React.Component {
       this.setState({error:'your browser doesnt support geo location'});
     }
   }
+  // success handler
   onSuccessLoadGeoLocation = (position) => {
     console.log(position);
     this.setState({loadingGeoLocation:false, error: '' });
     const { latitude: lat, longitude: lon } = position.coords;
-    // stringify to save object into localstorage
+    // JSON.stringify(): stringify to save object into localstorage
+    // JSON.parse(): parse string to object
     localStorage.setItem(POS_KEY, JSON.stringify({ lat: lat, lon: lon }));
     this.loadNearbyPosts();
   }
-
+  // fail handler
   onFailedLoadGeoLocation = () => {
     this.setState({loadingGeoLocation: false, error: 'Failed to load geolocation' });
   }
