@@ -20,7 +20,9 @@ import (
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gorilla/mux"
 
+	"github.com/go-redis/redis"
 	//"golang.org/x/oauth2/jwt"
+	"time"
 )
 
 type Location struct {
@@ -39,7 +41,7 @@ type Post struct {
 var mySigningKey = []byte("secret")
 
 func main() {
-	// Create a client
+	// Create a client / Create a index in ElasticSearch
 	client, err := elastic.NewClient(elastic.SetURL(ES_URL), elastic.SetSniff(false))
 	if err != nil {
 		panic(err)
@@ -51,6 +53,9 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	// If not, create a new mapping. For other fields (user, message, etc.) no need to have mapping as they are default.
+	// For geo location (lat, lon), we need to tell ES that they are geo points instead of two float points such that ES will use Geo-indexing for them (K-D tree)
 	if !exists {
 		// Create a new index.
 		mapping := `{
@@ -101,12 +106,16 @@ const (
 	TYPE = "post"
 	DISTANCE = "200km"
 	// Needs to update
-	//PROJECT_ID = "around-186000"
+	//PROJECT_ID = "around-227710"
 	//BT_INSTANCE = "around-post"
 	// Needs to update this URL if you deploy it to cloud.
-	ES_URL = "http://35.185.97.35 :9200"
+	ES_URL = "http://35.185.97.35:9200"
 	// GCS
-	BUCKET_NAME = "post-images-186000"
+	BUCKET_NAME = "post-images-227710"
+
+	// can be turned off if it causes bad performance
+	ENABLE_MEMCACHE = true
+	REDIS_URL       = "redis-18174.c1.us-central1-2.gce.cloud.redislabs.com:18174"
 )
 
 func handlerSearch(w http.ResponseWriter, r *http.Request) {
@@ -122,9 +131,31 @@ func handlerSearch(w http.ResponseWriter, r *http.Request) {
 		ran = val + "km"
 	}
 
+	// after parse is complete, then we concatenate to form a key
+	key := r.URL.Query().Get("lat") + ":" + r.URL.Query().Get("lon") + ":" + ran
+	if ENABLE_MEMCACHE {
+		rs_client := redis.NewClient(&redis.Options{
+			Addr:     REDIS_URL,
+			Password: "yLECe5dgAgJdpwTNOKrrOG43UrBjgPIj", // no password set
+			DB:       0,  // use default DB
+		})
+
+		val, err := rs_client.Get(key).Result()
+		if err != nil {
+			fmt.Printf("Redis cannot find the key %s as %v.\n", key, err)
+		} else {
+			// this is lazy loading, not write through
+			fmt.Printf("Redis find the key %s.\n", key)
+			w.Header().Set("Content-Type", "application/json")
+			w.Write([]byte(val))
+			return
+		}
+	}
+
 	fmt.Printf("Search received: %f %f %s\n", lat, lon, ran)
 
 	// Create a client
+	// Connect to ElasticSearch
 	client, err := elastic.NewClient(elastic.SetURL(ES_URL), elastic.SetSniff(false))
 	if err != nil {
 		panic(err)
@@ -133,10 +164,13 @@ func handlerSearch(w http.ResponseWriter, r *http.Request) {
 
 	// Define geo distance query as specified in
 	// https://www.elastic.co/guide/en/elasticsearch/reference/5.2/query-dsl-geo-distance-query.html
+	// Prepare a geo based query to find posts within a geo box.
 	q := elastic.NewGeoDistanceQuery("location")
 	q = q.Distance(ran).Lat(lat).Lon(lon)
 
 	// Some delay may range from seconds to minutes. So if you don't get enough results. Try it later.
+	// Get the results based on Index (similar to dataset) and query (q that we just prepared).
+	// Pretty() means to format the output.
 	searchResult, err := client.Search().
 		Index(INDEX).
 		Query(q).
@@ -150,6 +184,7 @@ func handlerSearch(w http.ResponseWriter, r *http.Request) {
 	// searchResult is of type SearchResult and returns hits, suggestions,
 	// and all kinds of other information from Elasticsearch.
 	fmt.Printf("Query took %d milliseconds\n", searchResult.TookInMillis)
+
 	// TotalHits is another convenience function that works even when something goes wrong.
 	fmt.Printf("Found a total of %d post\n", searchResult.TotalHits())
 
@@ -163,18 +198,32 @@ func handlerSearch(w http.ResponseWriter, r *http.Request) {
 		p := item.(Post) // p = (Post) item
 		fmt.Printf("Post by %s: %s at lat %v and lon %v\n", p.User, p.Message, p.Location.Lat, p.Location.Lon)
 
-		// TODO(student homework): Perform filtering based on keywords such as web spam etc.
+		// Perform filtering based on keywords such as web spam etc.
 		if !containsFilteredWords(&p.Message) {
 			ps = append(ps, p)
 		}
-
-		//ps = append(ps, p)
-
 	}
 	js, err := json.Marshal(ps)
 	if err != nil {
 		panic(err)
 		return
+	}
+
+	// write into cache
+	if ENABLE_MEMCACHE {
+		// create a connection
+		rs_client := redis.NewClient(&redis.Options{
+			Addr:     REDIS_URL,
+			Password: "yLECe5dgAgJdpwTNOKrrOG43UrBjgPIj", // no password set
+			DB:       0,  // use default DB
+		})
+
+		// Set the cache expiration to be 30 seconds
+		err := rs_client.Set(key, string(js), time.Second*30).Err()
+		if err != nil {
+			fmt.Printf("Redis cannot save the key %s as %v.\n", key, err)
+		}
+
 	}
 
 	w.Header().Set("Content-Type", "application/json")
@@ -196,10 +245,13 @@ func handlerPost(w http.ResponseWriter, r *http.Request) {
 	//id := uuid.New()
 	//// Save to ES.
 	//saveToES(&p, id)
+
+	// user signup and login
 	user := r.Context().Value("user")
 	claims := user.(*jwt.Token).Claims
 	username := claims.(jwt.MapClaims)["username"]
 
+	// set the header of the multipart form to store in GCS
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type,Authorization")
@@ -260,7 +312,7 @@ func handlerPost(w http.ResponseWriter, r *http.Request) {
 	//	panic(err)
 	//	return
 	//}
-	//// TODO (student questions) save Post into BT as well
+	//// TODO save Post into BT as well
 	//tbl := bt_client.Open("post")
 	//mut := bigtable.NewMutation()
 	//t := bigtable.Now()
@@ -276,11 +328,10 @@ func handlerPost(w http.ResponseWriter, r *http.Request) {
 	//	return
 	//}
 	//fmt.Printf("Post is saved to BigTable: %s\n", p.Message)
-
 }
 
+// Save a post to GCS, e.g. img, video, etc...
 func saveToGCS(ctx context.Context, r io.Reader, bucket, name string) (*storage.ObjectHandle, *storage.ObjectAttrs, error) {
-	// Student questions
 	client, err := storage.NewClient(ctx)
 	if err != nil {
 		return nil, nil, err
@@ -337,10 +388,11 @@ func saveToES(p *Post, id string) {
 	fmt.Printf("Post is saved to Index: %s\n", p.Message)
 }
 
+// Used for spam detection, can filter out posts with sensitive words
 func containsFilteredWords(s *string) bool {
 	filteredWords := []string{
 		"fuck",
-		"100",
+		"shit",
 	}
 	for _, word := range filteredWords {
 		if strings.Contains(*s, word) {
