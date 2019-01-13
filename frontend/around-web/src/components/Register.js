@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Form, Input, Button,
+  Form, Input, Button, message
 } from 'antd';
 import $ from 'jquery';
 import { API_ROOT } from '../constants';
@@ -23,6 +23,15 @@ class RegistrationForm extends React.Component {
             username: values.username,
             password: values.password
           })
+        }).then((response) => {
+          message.success(response);
+          // history acts like a browser, we can go forward and backward
+          // we could access history is because in Main.js, Register is passed to Route, therefore Route will have access
+          this.props.history.push('/login')
+        }, (error) => {
+          message.error(error.responseText)
+        }).catch((error) => {
+          message.error(error.responseText)
         })
         console.log('Received values of form: ', values);
       }
