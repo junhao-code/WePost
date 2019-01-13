@@ -1,10 +1,12 @@
 import React from 'react';
-import { WrappedRegister } from "./Register"
+import { Register } from "./Register"
 
 export class Main extends React.Component {
   render() {
     return(
-        <WrappedRegister/>
+        <div className="main">
+          <Register/>
+        </div>
     );
   }
 }

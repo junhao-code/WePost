@@ -2,8 +2,8 @@ import React from 'react';
 import {
   Form, Input, Button,
 } from 'antd';
-
-
+import $ from 'jquery';
+import { API_ROOT } from '../constants';
 
 class RegistrationForm extends React.Component {
   state = {
@@ -15,6 +15,14 @@ class RegistrationForm extends React.Component {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
+        $.ajax({
+          url: `${API_ROOT}/signup`,
+          method: 'POST',
+          data: JSON.stringify({
+            username: values.username,
+            password: values.password
+          })
+        })
         console.log('Received values of form: ', values);
       }
     });
@@ -71,7 +79,7 @@ class RegistrationForm extends React.Component {
 
 
     return (
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit} className="register-form">
           <Form.Item
               {...formItemLayout}
               label="Username"
@@ -118,6 +126,7 @@ class RegistrationForm extends React.Component {
     );
   }
 }
+
 // this is a high-order-component
-export const WrappedRegister = Form.create()(RegistrationForm);
+export const Register = Form.create()(RegistrationForm);
 
