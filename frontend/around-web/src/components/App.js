@@ -6,9 +6,9 @@ import { TOKEN_KEY } from "../constants"
 
 
 class App extends Component {
-  state = {
-    isLoggedin : false,
 
+  state = {
+    isLoggedin : Boolean(localStorage.getItem(TOKEN_KEY)),
   }
 
   handleLogin = (token) => {
@@ -16,11 +16,16 @@ class App extends Component {
     this.setState({isLoggedin : true});
   }
 
+  handleLogout = () => {
+    localStorage.removeItem(TOKEN_KEY);
+    this.setState({isLoggedin : false});
+  }
+
   render() {
     return (
       <div className="App">
-        <Header isLoggedin={this.state.isLoggedin} />
-        <Main handleLogin={this.handleLogin}/>
+        <Header isLoggedin={this.state.isLoggedin} handleLogout={this.handleLogout}/>
+        <Main isLoggedin={this.state.isLoggedin} handleLogin={this.handleLogin}/>
       </div>
     )
   }

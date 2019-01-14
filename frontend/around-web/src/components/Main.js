@@ -1,8 +1,8 @@
 import React from 'react';
 import { Register } from "./Register";
 import { Login } from "./Login";
-import { Switch, Route, Redirect} from 'react-router-dom';
 import { Home } from './Home';
+import { Switch, Route, Redirect} from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 
 
