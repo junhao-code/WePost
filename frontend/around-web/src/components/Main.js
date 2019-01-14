@@ -3,11 +3,18 @@ import { Register } from "./Register";
 import { Login } from "./Login";
 import { Switch, Route, Redirect} from 'react-router-dom';
 import { Home } from './Home';
+import { PropTypes } from 'prop-types';
 
 
 export class Main extends React.Component {
+
+  static propTypes = {
+    isLoggedin: PropTypes.bool.isRequired,
+    handleLogin: PropTypes.func.isRequired
+  }
+
   getLogin = () => {
-    return this.props.isLoggedin ? <Redirect to="/home"/> : <Login/>;
+    return this.props.isLoggedin ? <Redirect to="/home"/> : <Login handleLogin={this.props.handleLogin}/>;
   }
 
   getHome = () => {
