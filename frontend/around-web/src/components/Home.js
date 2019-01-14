@@ -3,19 +3,22 @@ import { Tabs, Button } from 'antd';
 
 const TabPane = Tabs.TabPane;
 
-const operations = <Button>Add Posts</Button>;
+const operations = <Button>New Post</Button>;
 
 export class Home extends React.Component {
   render() {
     return (
-        <div><Tabs tabBarExtraContent={operations}>
+        <Tabs
+            tabBarExtraContent={operations}
+            className="main-tabs"
+        >
           <TabPane tab="Posts" key="1">
             Content of tab 1
           </TabPane>
           <TabPane tab="Map" key="2">
             Content of tab 2
           </TabPane>
-        </Tabs></div>
+        </Tabs>
     );
   }
 }
