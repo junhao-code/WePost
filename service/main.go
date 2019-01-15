@@ -113,7 +113,9 @@ const (
 	// GCS
 	BUCKET_NAME = "post-images-227710"
 
-	// can be turned off if it causes bad performance
+	// can be turned off cache if it causes bad performance
+	// username: eceisagreatmajor@gmail.com
+	// pwd: ilove2019
 	ENABLE_MEMCACHE = true
 	REDIS_URL       = "redis-18174.c1.us-central1-2.gce.cloud.redislabs.com:18174"
 )
@@ -123,6 +125,10 @@ func handlerSearch(w http.ResponseWriter, r *http.Request) {
 	//lat := r.URL.Query().Get("lat")
 	//lon := r.URL.Query().Get("lon")
 	//fmt.Fprintf(w, "Search received: %s %s", lat, lon)
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
 	lat, _ := strconv.ParseFloat(r.URL.Query().Get("lat"), 64)
 	lon, _ := strconv.ParseFloat(r.URL.Query().Get("lon"), 64)
 	// range is optional
@@ -153,6 +159,7 @@ func handlerSearch(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Printf("Search received: %f %f %s\n", lat, lon, ran)
+
 
 	// Create a client
 	// Connect to ElasticSearch
@@ -226,8 +233,6 @@ func handlerSearch(w http.ResponseWriter, r *http.Request) {
 
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Write(js)
 
 }
