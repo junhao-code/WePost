@@ -153,6 +153,7 @@ func handlerSearch(w http.ResponseWriter, r *http.Request) {
 			// this is lazy loading, not write through
 			fmt.Printf("Redis find the key %s.\n", key)
 			w.Header().Set("Content-Type", "application/json")
+			w.Header().Set("Access-Control-Allow-Origin", "*")
 			w.Write([]byte(val))
 			return
 		}
@@ -233,6 +234,7 @@ func handlerSearch(w http.ResponseWriter, r *http.Request) {
 
 	}
 
+	// write into the response body
 	w.Write(js)
 
 }
