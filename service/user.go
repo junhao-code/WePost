@@ -103,6 +103,11 @@ func signupHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/plain")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 
+	// request method check
+	if r.Method != "POST" {
+		return
+	}
+
 	decoder := json.NewDecoder(r.Body)
 	var u User
 	if err := decoder.Decode(&u); err != nil {
@@ -131,6 +136,11 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "text/plain")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
+
+	// request method check
+	if r.Method != "POST" {
+		return
+	}
 
 	decoder := json.NewDecoder(r.Body)
 	var u User
